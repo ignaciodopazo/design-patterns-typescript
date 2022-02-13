@@ -34,26 +34,15 @@ interface Observer {
 }
 
 class ConcreteObserver implements Observer {
-    private state: any
     private subject: Subject
 
-    constructor (subject: Subject, initialSt: any) {
-        this.state = initialSt;
+    constructor (subject: Subject) {
         this.subject = subject
-    }
-
-    public getState(): any {
-        return this.state;
-    }
-
-    public setState(newSt: any) {
-        this.state = newSt;
     }
 
     public update(): void {
         let x = this.subject.getState()
         // do something with the new subject state
-        x = x
     }
 
 }
