@@ -1,14 +1,10 @@
 
-/**
- * Now to extend the factory we don't need to modify
- * AbstractFactory, just update the make implementation
- * of the given ConcreteFactory.
- */
-interface AbstractFactory {
+interface AbstractCreator {
+    // The factory method
     make(tag: string): AbstractProduct
 }
 
-class ConcreteFactory implements AbstractFactory {
+class ConcreteCreator implements AbstractCreator {
 
     make(tag: string): AbstractProduct {
         switch (tag) {
@@ -48,7 +44,7 @@ class ProductB implements AbstractProduct {
 }
 
 // Usage
-let cf = new ConcreteFactory()
+let cf = new ConcreteCreator()
 let pA = cf.make("ProductA")
 let pB = cf.make("ProductB")
 
