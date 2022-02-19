@@ -47,5 +47,9 @@ class ProductB implements AbstractProduct {
     someMethod() {}
 }
 
+// Usage
+let cf = new ConcreteFactory()
+let pA = cf.make("ProductA")
+let pB = cf.make("ProductB")
 
 export default {}

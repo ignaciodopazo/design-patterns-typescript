@@ -56,3 +56,12 @@ class ConcreteBuilder1<R> implements AbstractBuilder {
     }
 
 }
+
+// Usage
+let cb = new ConcreteBuilder1()
+let structure: Array<Token> = []
+let director = new Director(cb, structure)
+director.construct()
+let result = cb.getResult()
+
+export default {}

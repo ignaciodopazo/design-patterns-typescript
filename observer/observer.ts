@@ -1,5 +1,5 @@
 
-abstract class Subject {
+class Subject {
     private observers: Array<Observer> = []
     private state: any
 
@@ -38,6 +38,7 @@ class ConcreteObserver implements Observer {
 
     constructor (subject: Subject) {
         this.subject = subject
+        subject.attach(this)
     }
 
     public update(): void {
@@ -47,5 +48,10 @@ class ConcreteObserver implements Observer {
 
 }
 
+// Usage
+let s = new Subject()
+let o1 = new ConcreteObserver(s)
+let o2 = new ConcreteObserver(s)
+s.notify()
 
 export default {}
