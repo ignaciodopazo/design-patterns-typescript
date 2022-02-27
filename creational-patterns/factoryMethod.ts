@@ -1,4 +1,3 @@
-
 interface AbstractCreator {
     // The factory method
     make(tag: string): AbstractProduct

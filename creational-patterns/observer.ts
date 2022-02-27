@@ -1,4 +1,3 @@
-
 class Subject {
     private observers: Array<Observer> = []
     private state: any
