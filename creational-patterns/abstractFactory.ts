@@ -3,48 +3,45 @@
  * concrete factories => I don't like it !!
  */
 interface AbstractFactory {
-    createProductA(): AbstractProduct
-    createProductB(): AbstractProduct
+    createProductA(): AbstractProduct;
+    createProductB(): AbstractProduct;
 }
 
-class ConcreteFactory implements AbstractFactory {
+export class ConcreteFactory implements AbstractFactory {
 
     createProductA(): ProductA {
-        return new ProductA()
+        return new ProductA();
     }
 
     createProductB(): ProductB {
-        return new ProductB()
+        return new ProductB();
     }
 }
 
 interface AbstractProduct {
-    someMethod(): void
+    someMethod(): void;
 }
 
-class ProductA implements AbstractProduct {
-    private state: any
+export class ProductA implements AbstractProduct {
+    private state: string;
 
     constructor() {
-        this.state = undefined
+        this.state = "ProductA";
     }
 
-    someMethod() {}
+    someMethod(): string {
+        return this.state;
+    }
 }
 
-class ProductB implements AbstractProduct {
-    private state: any
+export class ProductB implements AbstractProduct {
+    private state: string;
 
     constructor() {
-        this.state = undefined
+        this.state = "ProductB";
     }
 
-    someMethod() {}
+    someMethod(): string {
+        return this.state;
+    }
 }
-
-// Usage
-let cf = new ConcreteFactory()
-let pA = cf.createProductA()
-let pB = cf.createProductA()
-
-export default {}
