@@ -1,13 +1,17 @@
-class Subject {
-    private observers: Array<Observer> = []
-    private state: any
+export class Subject<T> {
+    observers: Array<Observer<T>> = [];
+    state: T;
 
-    public attach(o: Observer) {
+    constructor (initialState: T) {
+        this.state = initialState;
+    }
+
+    public attach(o: Observer<T>) {
         this.observers.push(o);
     }
 
-    public dettach(o: Observer) {
-        const i = this.observers.indexOf(o)
+    public dettach(o: Observer<T>) {
+        const i = this.observers.indexOf(o);
         if (i > -1) {
             this.observers.splice(i, 1);
         }
@@ -19,38 +23,33 @@ class Subject {
         });
     }
 
-    public getState(): any {
-        return this.state;
-    }
-
-    public setState(newSt: any) {
+    public setState(newSt: T) {
         this.state = newSt;
+        this.notify();
     }
 }
 
-interface Observer {
-    update(): void
+export interface Observer<T> {
+    subject: Subject<T>;
+    update(): void;
 }
 
-class ConcreteObserver implements Observer {
-    private subject: Subject
+/**
+ * An example implementation of an observer.
+ */
+export class ConcreteObserver<T> implements Observer<T> {
+    subject: Subject<T>;
+    state: T;
 
-    constructor (subject: Subject) {
-        this.subject = subject
-        subject.attach(this)
+    constructor (initialState: T, subject: Subject<T>) {
+        this.state = initialState;
+        this.subject = subject;
+        subject.attach(this);
     }
 
     public update(): void {
-        let x = this.subject.getState()
-        // do something with the new subject state
+        // just retrieves the new Subject state and stores it
+        this.state = this.subject.state;
     }
 
 }
-
-// Usage
-let s = new Subject()
-let o1 = new ConcreteObserver(s)
-let o2 = new ConcreteObserver(s)
-s.notify()
-
-export default {}
