@@ -3,7 +3,7 @@ interface AbstractCreator {
     make(tag: string): AbstractProduct
 }
 
-class ConcreteCreator implements AbstractCreator {
+export class ConcreteCreator implements AbstractCreator {
 
     make(tag: string): AbstractProduct {
         switch (tag) {
@@ -22,29 +22,26 @@ interface AbstractProduct {
     someMethod(): void
 }
 
-class ProductA implements AbstractProduct {
-    private state: any
+export class ProductA implements AbstractProduct {
+    private state: number
 
     constructor() {
-        this.state = undefined
+        this.state = 0;
     }
 
-    someMethod() {}
+    someMethod(): number {
+        return this.state;
+    }
 }
 
-class ProductB implements AbstractProduct {
-    private state: any
+export class ProductB implements AbstractProduct {
+    private state: number
 
     constructor() {
-        this.state = undefined
+        this.state = 1;
     }
 
-    someMethod() {}
+    someMethod(): number {
+        return this.state;
+    }
 }
-
-// Usage
-let cf = new ConcreteCreator()
-let pA = cf.make("ProductA")
-let pB = cf.make("ProductB")
-
-export default {}
