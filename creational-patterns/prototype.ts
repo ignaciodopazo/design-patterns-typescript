@@ -1,50 +1,37 @@
-interface Prototype {
-    num: number;
-    clone(): Prototype;
-    operation(): void;
+interface Prototype<T> {
+    state: T;
+    clone(): Prototype<T>;
 }
 
-class ConcretePrototype1 implements Prototype {
-    public num: number = 0;
+export class ConcretePrototype1 implements Prototype<string> {
+    public state: string = "";
 
-    public clone(): Prototype {
-        return new ConcretePrototype1();
+    constructor (data: string) {
+        this.state = data;
     }
 
-    public operation(): number {
-        this.num += 1;
-        return this.num;
+    clone(): Prototype<string> {
+        return new ConcretePrototype1(this.state);
     }
 }
 
-class ConcretePrototype2 implements Prototype {
-    public num: number = 0;
+export class ConcretePrototype2 implements Prototype<number> {
+    public state: number = 0;
 
-    public clone(): Prototype {
-        return new ConcretePrototype2();
+    constructor (data: number) {
+        this.state = data;
     }
 
-    public operation(): number {
-        this.num -= 1;
-        return this.num;
+    clone(): Prototype<number> {
+        return new ConcretePrototype2(this.state);
     }
 }
 
 /**
  * We can also have a class to manipulate the prototypes if needed by
- * the particular use case.
+ * the particular use case. Here I use just a function.
  */
-function clientOperation(aPrototype: Prototype): {p: Prototype, x: number} {
-    let p = aPrototype.clone();
-    p.operation();
-    let x = p.num;
-    return {p, x};
+export function clientOperation<T>(prototype: Prototype<T>): T {
+    let p = prototype.clone();
+    return p.state;
 }
-
-
-// Usage
-let cp1 = new ConcretePrototype1();
-let {p, x} = clientOperation(cp1);
-
-let cp2 = new ConcretePrototype2();
-let {p: cp2_, x: num} = clientOperation(cp2);
